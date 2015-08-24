@@ -43,13 +43,13 @@ public class SellTradeManagerSaga extends TradeManagerSaga {
         if (logger.isDebugEnabled()) {
             logger.debug(
                     "A new sell transaction is started with identifier {}, for portfolio with identifier {} and orderbook with identifier {}",
-                    new Object[]{event.getTransactionIdentifier(),
-                            event.getPortfolioIdentifier(),
-                            event.getOrderbookIdentifier()});
+                    event.getTransactionIdentifier(),
+                    event.getPortfolioIdentifier(),
+                    event.getOrderbookIdentifier());
             logger.debug("The sell transaction with identifier {} is for selling {} items for the price of {}",
-                    new Object[]{event.getTransactionIdentifier(),
-                            event.getTotalItems(),
-                            event.getPricePerItem()});
+                    event.getTransactionIdentifier(),
+                    event.getTotalItems(),
+                    event.getPricePerItem());
         }
 
         setTransactionIdentifier(event.getTransactionIdentifier());
@@ -123,7 +123,7 @@ public class SellTradeManagerSaga extends TradeManagerSaga {
     @EndSaga
     public void handle(SellTransactionExecutedEvent event) {
         logger.debug("Sell Transaction {} is executed, last amount of executed items is {} for a price of {}",
-                new Object[]{event.getTransactionIdentifier(), event.getAmountOfItems(), event.getItemPrice()});
+                event.getTransactionIdentifier(), event.getAmountOfItems(), event.getItemPrice());
 
         ConfirmItemReservationForPortfolioCommand confirmCommand =
                 new ConfirmItemReservationForPortfolioCommand(getPortfolioIdentifier(),
@@ -140,9 +140,9 @@ public class SellTradeManagerSaga extends TradeManagerSaga {
     @SagaEventHandler(associationProperty = "transactionIdentifier")
     public void handle(SellTransactionPartiallyExecutedEvent event) {
         logger.debug("Sell Transaction {} is partially executed, amount of executed items is {} for a price of {}",
-                new Object[]{event.getTransactionIdentifier(),
-                        event.getAmountOfExecutedItems(),
-                        event.getItemPrice()});
+                event.getTransactionIdentifier(),
+                event.getAmountOfExecutedItems(),
+                event.getItemPrice());
 
         ConfirmItemReservationForPortfolioCommand confirmCommand =
                 new ConfirmItemReservationForPortfolioCommand(getPortfolioIdentifier(),

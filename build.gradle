@@ -1,0 +1,44 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'org.axonframework.samples'
+version = '2.0-SNAPSHOT'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "http://repo.maven.apache.org/maven2" }
+  }
+
+  configurations.all {
+it.exclude group: 'javassist', module: 'javassist'
+it.exclude group: 'commons-logging'
+it.exclude group: 'hsqldb', module: 'hsqldb'
+it.exclude group: 'org.slf4j', module: '1.5*'
+it.exclude group: 'org.springframework', module: '2.*'
+it.exclude group: 'org.springframework', module: '3.0.*'
+}
+  dependencies {
+    compile group: 'javax.transaction', name: 'jta', version:'1.1'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.5'
+    compile(group: 'org.springframework', name: 'spring-test', version:'4.0.6.RELEASE') {
+exclude(module: 'commons-logging')
+    }
+    runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.7.5'
+    runtime group: 'org.slf4j', name: 'jul-to-slf4j', version:'1.7.5'
+    runtime group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.5'
+    runtime group: 'log4j', name: 'log4j', version:'1.2.17'
+    testCompile group: 'junit', name: 'junit-dep', version:'4.11'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version:'1.3'
+    testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.5'
+}
+
+  
+}

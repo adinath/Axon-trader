@@ -1,0 +1,29 @@
+
+apply plugin: 'war'
+
+description = 'Axon Trader Sample - Web ui'
+dependencies {
+  compile project(':axon-trader-orders')
+  compile project(':axon-trader-trade-engine')
+  compile project(':axon-trader-users')
+  compile project(':axon-trader-users-query')
+  compile project(':axon-trader-companies')
+  compile project(':axon-trader-infrastructure')
+  compile project(':axon-trader-query')
+  compile project(':axon-trader-external-listeners')
+    compile group: 'org.springframework', name: 'spring-webmvc', version:'4.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aop', version:'4.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context-support', version:'4.0.6.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version:'3.2.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version:'3.2.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version:'3.2.5.RELEASE'
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version:'1.4.3'
+    compile group: 'javax.servlet', name: 'jstl', version:'1.1.2'
+    compile group: 'taglibs', name: 'standard', version:'1.1.2'
+    compile group: 'opensymphony', name: 'sitemesh', version:'2.4.2'
+    compile group: 'javax.validation', name: 'validation-api', version:'1.0.0.GA'
+    compile(group: 'org.hibernate', name: 'hibernate-validator', version:'4.3.2.Final') {
+exclude(module: 'slf4j-api')
+    }
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
+}

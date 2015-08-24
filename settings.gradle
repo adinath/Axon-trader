@@ -1,0 +1,22 @@
+rootProject.name = 'axon-trader'
+include ':axon-trader-core-api'
+include ':axon-trader-infrastructure'
+include ':axon-trader-query'
+include ':axon-trader-orders'
+include ':axon-trader-trade-engine'
+include ':axon-trader-users'
+include ':axon-trader-users-query'
+include ':axon-trader-companies'
+include ':axon-trader-webui'
+include ':axon-trader-external-listeners'
+
+project(':axon-trader-core-api').projectDir = "$rootDir/core-api" as File
+project(':axon-trader-infrastructure').projectDir = "$rootDir/infrastructure" as File
+project(':axon-trader-query').projectDir = "$rootDir/query" as File
+project(':axon-trader-orders').projectDir = "$rootDir/orders" as File
+project(':axon-trader-trade-engine').projectDir = "$rootDir/trade-engine" as File
+project(':axon-trader-users').projectDir = "$rootDir/users" as File
+project(':axon-trader-users-query').projectDir = "$rootDir/users-query" as File
+project(':axon-trader-companies').projectDir = "$rootDir/companies" as File
+project(':axon-trader-webui').projectDir = "$rootDir/web-ui" as File
+project(':axon-trader-external-listeners').projectDir = "$rootDir/external-listeners" as File

@@ -44,13 +44,13 @@ public class BuyTradeManagerSaga extends TradeManagerSaga {
         if (logger.isDebugEnabled()) {
             logger.debug(
                     "A new buy transaction is started with identifier {}, for portfolio with identifier {} and orderbook with identifier {}",
-                    new Object[]{event.getTransactionIdentifier(),
-                            event.getPortfolioIdentifier(),
-                            event.getOrderbookIdentifier()});
+                    event.getTransactionIdentifier(),
+                    event.getPortfolioIdentifier(),
+                    event.getOrderbookIdentifier());
             logger.debug("The new buy transaction with identifier {} is for buying {} items for the price of {}",
-                    new Object[]{event.getTransactionIdentifier(),
-                            event.getTotalItems(),
-                            event.getPricePerItem()});
+                    event.getTransactionIdentifier(),
+                    event.getTotalItems(),
+                    event.getPricePerItem());
         }
         setTransactionIdentifier(event.getTransactionIdentifier());
         setOrderbookIdentifier(event.getOrderbookIdentifier());
@@ -89,9 +89,9 @@ public class BuyTradeManagerSaga extends TradeManagerSaga {
     public void handle(CashReservationRejectedEvent event) {
         logger.debug(
                 "Not enough cash was available to make reservation in transaction {} for portfolio {}. Required: {}",
-                new Object[]{getTransactionIdentifier(),
-                        event.getPortfolioIdentifier(),
-                        event.getAmountToPayInCents()});
+                getTransactionIdentifier(),
+                event.getPortfolioIdentifier(),
+                event.getAmountToPayInCents());
     }
 
     @SagaEventHandler(associationProperty = "transactionIdentifier")
@@ -132,7 +132,7 @@ public class BuyTradeManagerSaga extends TradeManagerSaga {
     @EndSaga
     public void handle(BuyTransactionExecutedEvent event) {
         logger.debug("Buy Transaction {} is executed, last amount of executed items is {} for a price of {}",
-                new Object[]{event.getTransactionIdentifier(), event.getAmountOfItems(), event.getItemPrice()});
+                event.getTransactionIdentifier(), event.getAmountOfItems(), event.getItemPrice());
         ConfirmCashReservationCommand confirmCommand =
                 new ConfirmCashReservationCommand(getPortfolioIdentifier(),
                         getTransactionIdentifier(),
@@ -148,9 +148,9 @@ public class BuyTradeManagerSaga extends TradeManagerSaga {
     @SagaEventHandler(associationProperty = "transactionIdentifier")
     public void handle(BuyTransactionPartiallyExecutedEvent event) {
         logger.debug("Buy Transaction {} is partially executed, amount of executed items is {} for a price of {}",
-                new Object[]{event.getTransactionIdentifier(),
-                        event.getAmountOfExecutedItems(),
-                        event.getItemPrice()});
+                event.getTransactionIdentifier(),
+                event.getAmountOfExecutedItems(),
+                event.getItemPrice());
         ConfirmCashReservationCommand confirmCommand =
                 new ConfirmCashReservationCommand(getPortfolioIdentifier(),
                         getTransactionIdentifier(),
